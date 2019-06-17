@@ -5,7 +5,8 @@ export default class CurrencyList extends Component {
     render() {
         return (
             <div>
-                {this.props.currencies.map((currency, index) => <CurrencyCard key={index} currency={currency}/>)}
+                {this.props.currencies.map((currency, index) => <CurrencyCard key={index} currency={currency} changeSelectedCurrency={this.props.changeSelectedCurrency}
+                selectedCurrency={this.props.selectedCurrency}/>)}
             </div>
         )
     }

@@ -46,7 +46,7 @@ export default class App extends React.Component {
   }
 
   getUserData = () => {
-    const userURL = "http://localhost:3000/users/81";
+    const userURL = "http://localhost:3000/users/11";
     return fetch(userURL)
       .then(resp => resp.json())
       .then(data => this.setState({ userData: data }))
@@ -75,7 +75,7 @@ export default class App extends React.Component {
   };
 
   changeSelectedCurrency = currency => {
-    const currencyURL = `http://localhost:3000/currencys/${currency.id}`;
+    const currencyURL = `http://localhost:3000/currencies/${currency.id}`;
     return fetch(currencyURL)
       .then(resp => resp.json())
       .then(data => this.setState({ selectedCurrency: data }));
@@ -104,7 +104,10 @@ export default class App extends React.Component {
             exact
             path="/currencies"
             component={props => {
-              return <CurrencyList currencies={this.state.currencies} />;
+              return <CurrencyList currencies={this.state.currencies} 
+              changeSelectedCurrency={this.changeSelectedCurrency}
+              currencies={this.state.currencies}
+              />;
             }}
           />
           <Route
