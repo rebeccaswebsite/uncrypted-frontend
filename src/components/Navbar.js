@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
     <div>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">
-          Navbar
+          Uncrypted
         </a>
         <button
           class="navbar-toggler"
@@ -20,19 +21,19 @@ export default function Navbar() {
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link" href="#">
-                My Dashboard <span class="sr-only">(current)</span>
-              </a>
+              <Link class="nav-link" to="/dashboard">
+                My Dashboard
+              </Link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
-                My Portfolios
-              </a>
+              <Link class="nav-link" to="/markets">
+                Markets
+              </Link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <Link class="nav-link" to="/currencies">
                 Currencies
-              </a>
+              </Link>
             </li>
             <li class="nav-item">
               <a
