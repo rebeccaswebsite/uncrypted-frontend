@@ -28,13 +28,16 @@ export default class App extends React.Component {
   
   componentDidMount() {
     this.getUserData()
+
     this.getCurrencies()
+    setInterval(() => this.getCurrencies(), 10000)
+
     this.getMarkets()
     this.getMarket()
   }
   
   getUserData = () => {
-    const userURL = "http://localhost:3000/users/1";
+    const userURL = "http://localhost:3000/users/11";
     return fetch(userURL)
     .then(resp => resp.json())
     .then(data => this.setState({ userData: data }))
@@ -55,7 +58,7 @@ export default class App extends React.Component {
   }
 
   getMarket = () => {
-    const marketURL = "http://localhost:3000/markets/1";
+    const marketURL = "http://localhost:3000/markets/16";
     return fetch(marketURL)
     .then(resp => resp.json())
     .then(data => this.setState({ market: data }))
