@@ -6,25 +6,33 @@ import Dashboard from "../src/components/Dashboard";
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
-      userData: {}
+      userData: {
+        email: '',
+        name: '',
+        portfolios: [],
+        profile_picture: ''
+      }
     };
   }
-
+  
+  componentDidMount() {
+    this.getUserData();
+  }
+  
   getUserData = () => {
     const userURL = "http://localhost:3000/users/1";
-    return fetch(userURL).then(resp => resp.json());
+    return fetch(userURL)
+    .then(resp => resp.json())
+    .then(data => this.setState({ userData: data })).then(console.log)
   };
-
-  componentDidMount() {
-    this.getUserData().then(resp => this.setState({ userData: resp }));
-  }
 
   render() {
     return (
       <div>
         <Navbar />
+        <Dashboard portfolios={this.state.userData.portfolios} />
       </div>
     );
   }
