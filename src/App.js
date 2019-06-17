@@ -2,9 +2,9 @@ import React from "react";
 import Navbar from "../src/components/Navbar";
 import Search from "../src/components/Search";
 import Dashboard from "../src/components/Dashboard";
-import CurrencyList from "../src/components/CurrencyList"
-import MarketList from "../src/components/MarketList"
-import Market from "../src/components/Market"
+import CurrencyList from "../src/components/CurrencyList";
+import MarketList from "../src/components/MarketList";
+import Market from "../src/components/Market";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -16,6 +16,7 @@ export default class App extends React.Component {
         name: "",
         portfolios: [],
 <<<<<<< HEAD
+<<<<<<< HEAD
         profile_picture: ""
 =======
         profile_picture: ''
@@ -26,24 +27,64 @@ export default class App extends React.Component {
         name: '',
         currency_markets: [],
 >>>>>>> 5a1f05617ea56956d81e341c3ac71b87360aa32d
+=======
+        markets: [],
+        market: {
+          name: "",
+          currency_markets: []
+        }
+>>>>>>> fran
       }
     };
   }
 
   componentDidMount() {
+<<<<<<< HEAD
     this.getUserData()
     this.getCurrencies()
     this.getMarkets()
     this.getMarket()
+=======
+    this.getUserData();
+    this.getCurrencies();
+    this.getMarkets();
+    this.getMarket();
+>>>>>>> fran
   }
 
   getUserData = () => {
     const userURL = "http://localhost:3000/users/81";
     return fetch(userURL)
 <<<<<<< HEAD
+<<<<<<< HEAD
       .then(resp => resp.json())
       .then(data => this.setState({ userData: data }))
       .then(console.log);
+=======
+      .then(resp => resp.json())
+      .then(data => this.setState({ userData: data }));
+  };
+
+  getCurrencies = () => {
+    const currenciesURL = "http://localhost:3000/currencies";
+    return fetch(currenciesURL)
+      .then(resp => resp.json())
+      .then(data => this.setState({ currencies: data }));
+  };
+
+  getMarkets = () => {
+    const marketsURL = "http://localhost:3000/markets";
+    return fetch(marketsURL)
+      .then(resp => resp.json())
+      .then(data => this.setState({ markets: data }));
+  };
+
+  getMarket = () => {
+    const marketURL = "http://localhost:3000/markets/1";
+    return fetch(marketURL)
+      .then(resp => resp.json())
+      .then(data => this.setState({ market: data }));
+>>>>>>> fran
   };
 =======
     .then(resp => resp.json())
@@ -76,7 +117,11 @@ export default class App extends React.Component {
     return (
       <div>
         <Navbar />
+<<<<<<< HEAD
         <Dashboard portfolios={this.state.userData.portfolios}/>
+=======
+        <Dashboard portfolios={this.state.userData.portfolios} />
+>>>>>>> fran
         <CurrencyList currencies={this.state.currencies} />
         <MarketList markets={this.state.markets} />
         <Market market={this.state.market} />
