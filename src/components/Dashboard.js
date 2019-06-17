@@ -1,12 +1,11 @@
 import React from "react";
-import CurrencyList from "./CurrencyList";
+import PortfolioCurrencyList from "./PortfolioCurrencyList";
 import PortfolioList from "./PortfolioList";
 
 export default function Dashboard(props) {
-  // debugger
   return (
     <div>
-      <CurrencyList portfolios={props.portfolios} />
+      <PortfolioCurrencyList portfolios={props.portfolios} />
       <PortfolioList portfolios={props.portfolios} />
     </div>
   );

@@ -1,11 +1,11 @@
-import React from "react"
-import CurrencyCard from './CurrencyCard.js'
+import React, { Component } from 'react'
+import CurrencyCard from './CurrencyCard'
 
-export default class CurrencyList extends React.Component{    
+export default class CurrencyList extends Component {
     render() {
         return (
             <div>
-                {this.props.portfolios.map(portfolio => {return portfolio.currencies.map((currency, index) => <CurrencyCard key={index} currency={currency} /> )}) }
+                {this.props.currencies.map((currency, index) => <CurrencyCard key={index} currency={currency}/>)}
             </div>
         )
     }
