@@ -6,6 +6,7 @@ import CurrencyList from "../src/components/CurrencyList";
 import MarketList from "../src/components/MarketList";
 import Market from "../src/components/Market";
 import Currency from "../src/components/Currency";
+import MyPortfolioList from "../src/components/MyPortfolioList";
 import { Route, Switch } from "react-router-dom";
 
 export default class App extends React.Component {
@@ -32,7 +33,8 @@ export default class App extends React.Component {
         volume: "",
         change: "",
         currency_markets: []
-      }
+      },
+      portfolios: []
     };
   }
 
@@ -43,6 +45,7 @@ export default class App extends React.Component {
     setInterval(() => this.getCurrencies(), 10000);
 
     this.getMarkets();
+    // this.getPortfolios();
   }
 
   getUserData = () => {
@@ -65,6 +68,13 @@ export default class App extends React.Component {
     return fetch(marketsURL)
       .then(resp => resp.json())
       .then(data => this.setState({ markets: data }));
+  };
+
+  getPortfolios = () => {
+    const portfoliosURL = "http://localhost:3000/portfolios";
+    return fetch(portfoliosURL)
+      .then(resp => resp.json())
+      .then(data => this.setState({ portfolios: data }));
   };
 
   changeSelectedMarket = market => {
@@ -130,12 +140,23 @@ export default class App extends React.Component {
               return <Market selectedMarket={this.state.selectedMarket} />;
             }}
           />
+
           <Route
             exact
             path={`/currencies/${this.state.selectedCurrency.id}`}
             component={props => {
               return (
                 <Currency selectedCurrency={this.state.selectedCurrency} />
+              );
+            }}
+          />
+
+          <Route
+            exact
+            path={`/my-portfolios`}
+            component={props => {
+              return (
+                <MyPortfolioList portfolios={this.state.userData.portfolios} />
               );
             }}
           />

@@ -1,7 +1,8 @@
 import React from "react"
 import PortfolioCurrencyCard from './PortfolioCurrencyCard'
 
-export default class PortfolioCurrencyList extends React.Component{    
+export default class PortfolioCurrencyList extends React.Component{ 
+    debugger   
     render() {
         return (
             <div>

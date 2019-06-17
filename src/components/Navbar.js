@@ -36,6 +36,11 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
+              <Link className="nav-link" to="/my-portfolios">
+                My Portfolios
+              </Link>
+            </li>
+            <li className="nav-item">
               <a
                 className="nav-link disabled"
                 href="#"
