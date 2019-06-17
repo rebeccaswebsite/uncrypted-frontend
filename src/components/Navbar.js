@@ -4,42 +4,42 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
   return (
     <div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <a className="navbar-brand" href="#">
           Uncrypted
         </a>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#navbarNav"
           aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon" />
+          <span className="navbar-toggler-icon" />
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <Link class="nav-link" to="/dashboard">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item active">
+              <Link className="nav-link" to="/dashboard">
                 My Dashboard
               </Link>
             </li>
-            <li class="nav-item">
-              <Link class="nav-link" to="/markets">
+            <li className="nav-item">
+              <Link className="nav-link" to="/markets">
                 Markets
               </Link>
             </li>
-            <li class="nav-item">
-              <Link class="nav-link" to="/currencies">
+            <li className="nav-item">
+              <Link className="nav-link" to="/currencies">
                 Currencies
               </Link>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <a
-                class="nav-link disabled"
+                className="nav-link disabled"
                 href="#"
-                tabindex="-1"
+                tabIndex="-1"
                 aria-disabled="true">
                 Disabled
               </a>
