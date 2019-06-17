@@ -32,7 +32,6 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-<<<<<<< HEAD
     this.getUserData()
 
     this.getCurrencies()
@@ -40,20 +39,10 @@ export default class App extends React.Component {
 
     this.getMarkets()
     this.getMarket()
-=======
-    this.getUserData();
-    this.getCurrencies();
-    this.getMarkets();
-    this.getMarket();
->>>>>>> a82106203ecb7adb176fe15455507c8b0f905772
   }
 
   getUserData = () => {
-<<<<<<< HEAD
     const userURL = "http://localhost:3000/users/11";
-=======
-    const userURL = "http://localhost:3000/users/81";
->>>>>>> a82106203ecb7adb176fe15455507c8b0f905772
     return fetch(userURL)
       .then(resp => resp.json())
       .then(data => this.setState({ userData: data }))
