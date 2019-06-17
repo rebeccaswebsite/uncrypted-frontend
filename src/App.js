@@ -19,17 +19,13 @@ export default class App extends React.Component {
       },
       currencies: [],
       markets: [],
-      market: {
+      selectedMarket: {
         name: "",
-        currency_markets: [],
-        markets: [],
-        market: {
-          name: "",
-          currency_markets: []
+        currency_markets: []
         }
       }
-    };
-  }
+    }
+  
 
   componentDidMount() {
     this.getUserData()
@@ -85,10 +81,10 @@ export default class App extends React.Component {
   };
 
   getMarket = () => {
-    const marketURL = "http://localhost:3000/markets/76";
+    const marketURL = "http://localhost:3000/markets/16";
     return fetch(marketURL)
       .then(resp => resp.json())
-      .then(data => this.setState({ market: data }));
+      .then(data => this.setState({ selectedMarket: data }));
   };
 
   render() {
@@ -98,7 +94,7 @@ export default class App extends React.Component {
         <Dashboard portfolios={this.state.userData.portfolios} />
         <CurrencyList currencies={this.state.currencies} />
         <MarketList markets={this.state.markets} />
-        <Market market={this.state.market} />
+        <Market selectedMarket={this.state.selectedMarket} />
       </div>
     );
   }
