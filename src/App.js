@@ -46,7 +46,6 @@ export default class App extends React.Component {
     setInterval(() => this.getCurrencies(), 10000);
 
     this.getMarkets();
-    // this.getPortfolios();
   }
 
   getUserData = () => {
@@ -56,6 +55,16 @@ export default class App extends React.Component {
       .then(data => this.setState({ userData: data }))
       .then(console.log);
   };
+
+  deleteUser = user => {
+      return fetch(`http://localhost:3000/users/${user.id}`, {
+        method: 'delete'
+      }).then(response =>
+        response.json().then(json => {
+          return json;
+        })
+      );
+  }
 
   getCurrencies = () => {
     const currenciesURL = "http://localhost:3000/currencies";
@@ -167,7 +176,7 @@ export default class App extends React.Component {
             path={`/my-profile`}
             component={props => {
               return (
-                <UserProfile user={this.state.userData} />
+                <UserProfile user={this.state.userData} deleteUser={this.deleteUser} />
               );
             }}
           />
