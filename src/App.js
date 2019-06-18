@@ -51,7 +51,7 @@ class App extends React.Component {
     this.setState({ loggedInUser: { id: userId, name: userName } });
     this.getUserData(userId);
     this.props.history.push("/dashboard");
-    localStorage.setItem("token, user.id");
+    localStorage.setItem("token", userId);
   };
 
   logout = () => {
@@ -64,6 +64,7 @@ class App extends React.Component {
         profile_picture: ""
       }
     });
+    localStorage.setItem("token", "");
   };
 
   getUserData = id => {
@@ -156,6 +157,7 @@ class App extends React.Component {
             render={props => {
               return (
                 <MarketList
+                  loggedInUser={this.state.loggedInUser}
                   selectedMarket={this.state.selectedMarket}
                   changeSelectedMarket={this.changeSelectedMarket}
                   markets={this.state.markets}
