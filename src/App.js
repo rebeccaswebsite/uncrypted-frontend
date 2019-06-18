@@ -7,6 +7,7 @@ import MarketList from "../src/components/MarketList";
 import Market from "../src/components/Market";
 import Currency from "../src/components/Currency";
 import MyPortfolioList from "../src/components/MyPortfolioList";
+import UserProfile from "../src/components/UserProfile";
 import { Route, Switch } from "react-router-dom";
 
 export default class App extends React.Component {
@@ -45,7 +46,6 @@ export default class App extends React.Component {
     setInterval(() => this.getCurrencies(), 10000);
 
     this.getMarkets();
-    // this.getPortfolios();
   }
     return fetch(signinURL, options).then(resp => resp.json());
   };
@@ -57,6 +57,16 @@ export default class App extends React.Component {
       .then(data => this.setState({ userData: data }))
       .then(console.log);
   };
+
+  deleteUser = user => {
+      return fetch(`http://localhost:3000/users/${user.id}`, {
+        method: 'delete'
+      }).then(response =>
+        response.json().then(json => {
+          return json;
+        })
+      );
+  }
 
   getCurrencies = () => {
     const currenciesURL = "http://localhost:3000/currencies";
@@ -162,6 +172,16 @@ export default class App extends React.Component {
             component={props => {
               return (
                 <MyPortfolioList portfolios={this.state.userData.portfolios} />
+              );
+            }}
+          />
+
+          <Route
+            exact
+            path={`/my-profile`}
+            component={props => {
+              return (
+                <UserProfile user={this.state.userData} deleteUser={this.deleteUser} />
               );
             }}
           />

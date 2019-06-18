@@ -40,6 +40,11 @@ export default function Navbar() {
                 My Portfolios
               </Link>
             </li>
+            <li className="nav-item active">
+              <Link className="nav-link" to="/my-profile">
+                My Profile
+              </Link>
+            </li>
             <li className="nav-item">
               <a
                 className="nav-link disabled"
