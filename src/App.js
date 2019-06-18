@@ -87,6 +87,21 @@ export default class App extends React.Component {
       .then(data => this.setState({ portfolios: data }));
   };
 
+  newPortfolio = (user, risk_profile) => {
+    const data = {
+      user_id: user.id,
+      risk_profile: risk_profile
+    }
+    return fetch('http://localhost:3000/portfolios/', {
+      method: 'POST',
+      body: data
+    })
+    .then(response =>
+      response.json().then(json => {
+        return json;
+      }))
+  }
+
   changeSelectedMarket = market => {
     const marketURL = `http://localhost:3000/markets/${market.id}`;
     return fetch(marketURL)
@@ -166,7 +181,7 @@ export default class App extends React.Component {
             path={`/my-portfolios`}
             component={props => {
               return (
-                <MyPortfolioList portfolios={this.state.userData.portfolios} />
+                <MyPortfolioList portfolios={this.state.userData.portfolios} newPortfolio={this.newPortfolio} user={this.state.userData}/>
               );
             }}
           />
