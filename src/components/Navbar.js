@@ -1,12 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar(props) {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand" href="#">
-          Uncrypted
+          {props.loggedInUser === ""
+            ? `Uncrypted`
+            : `Uncrypted - ${props.loggedInUser}`}
         </a>
         <button
           className="navbar-toggler"
@@ -45,15 +47,22 @@ export default function Navbar() {
                 My Profile
               </Link>
             </li>
-            <li className="nav-item">
-              <a
-                className="nav-link disabled"
-                href="#"
-                tabIndex="-1"
-                aria-disabled="true">
-                Disabled
-              </a>
-            </li>
+            {props.loggedInUser === "" ? (
+              <li className="nav-item">
+                <Link className="nav-link" to="/login">
+                  Login
+                </Link>
+              </li>
+            ) : (
+              <li className="nav-item">
+                <Link
+                  className="nav-link"
+                  onClick={() => props.logout()}
+                  to="/login">
+                  Logout
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </nav>
