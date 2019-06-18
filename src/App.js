@@ -207,14 +207,10 @@ class App extends React.Component {
             path={`/my-portfolios`}
             render={props => {
               return (
-<<<<<<< HEAD
-                <MyPortfolioList portfolios={this.state.userData.portfolios} newPortfolio={this.newPortfolio} user={this.state.userData}/>
-=======
                 <MyPortfolioList
                   portfolios={this.state.userData.portfolios}
                   {...props}
                 />
->>>>>>> development
               );
             }}
           />
