@@ -47,9 +47,11 @@ export default class App extends React.Component {
     this.getMarkets();
     // this.getPortfolios();
   }
+    return fetch(signinURL, options).then(resp => resp.json());
+  };
 
   getUserData = () => {
-    const userURL = "http://localhost:3000/users/11";
+    const userURL = "http://localhost:3000/users/90";
     return fetch(userURL)
       .then(resp => resp.json())
       .then(data => this.setState({ userData: data }))
@@ -114,10 +116,13 @@ export default class App extends React.Component {
             exact
             path="/currencies"
             component={props => {
-              return <CurrencyList currencies={this.state.currencies} 
-              changeSelectedCurrency={this.changeSelectedCurrency}
-              currencies={this.state.currencies}
-              />;
+              return (
+                <CurrencyList
+                  currencies={this.state.currencies}
+                  changeSelectedCurrency={this.changeSelectedCurrency}
+                  currencies={this.state.currencies}
+                />
+              );
             }}
           />
           <Route
