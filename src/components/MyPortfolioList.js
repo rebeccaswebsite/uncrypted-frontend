@@ -26,7 +26,7 @@ export default class MyPortfolioList extends Component {
         return (
          <div>
             <p>Click on each portfolio for more information</p>
-            {this.props.portfolios.map(portfolio => <PortfolioCard portfolio={portfolio}/>) }
+            {this.props.portfolios.map((portfolio, index) => <PortfolioCard key={index} portfolio={portfolio}/>) }
 
             <p>To add a new portfolio, enter the risk factor your portfolio will have below (0-10)</p>
             <form onSubmit={event => this.handleSubmit(event)}>

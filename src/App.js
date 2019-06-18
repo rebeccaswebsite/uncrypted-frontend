@@ -36,8 +36,7 @@ class App extends React.Component {
         volume: "",
         change: "",
         currency_markets: []
-      },
-      portfolios: []
+      }    
     };
   }
 
@@ -78,9 +77,10 @@ class App extends React.Component {
     localStorage.removeItem("token");
   };
 
-  getUserData = id => {
-    const userURL = `http://localhost:3000/users/${id}`;
-    return fetch(userURL)
+  getUserData = () => {
+    const userURL = `http://localhost:3000/users/`;
+    const user_id = this.state.loggedInUser.id
+    return fetch(userURL + user_id)
       .then(resp => resp.json())
       .then(data => this.setState({ userData: data }))
       .then(console.log);
@@ -100,13 +100,6 @@ class App extends React.Component {
       .then(data => this.setState({ markets: data }));
   };
 
-  getPortfolios = () => {
-    const portfoliosURL = "http://localhost:3000/portfolios";
-    return fetch(portfoliosURL)
-      .then(resp => resp.json())
-      .then(data => this.setState({ portfolios: data }));
-  };
-
   newPortfolio = num => {
     const data = {
       user_id: this.state.loggedInUser.id,
@@ -122,7 +115,7 @@ class App extends React.Component {
     .then(response =>
       response.json())
       .then(data => {
-        console.log(data);
+        this.setState({userData: {portfolios: [...this.state.userData.portfolios, data]}});
       })
   }
 
