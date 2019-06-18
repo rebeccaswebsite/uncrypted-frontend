@@ -42,3 +42,5 @@ export default class PortfolioCard extends Component {
         )
     }
 }
+
+// add or delete a currency to portfolio, delete a portfolio
