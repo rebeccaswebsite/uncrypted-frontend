@@ -95,9 +95,9 @@ class App extends React.Component {
       .then(data => this.setState({ portfolios: data }));
   };
 
-  newPortfolio = (user, risk_profile) => {
+  newPortfolio = (risk_profile) => {
     const data = {
-      user_id: user.id,
+      user_id: this.state.loggedInUser.id,
       risk_profile: risk_profile
     }
     return fetch('http://localhost:3000/portfolios/', {
@@ -209,6 +209,7 @@ class App extends React.Component {
               return (
                 <MyPortfolioList
                   portfolios={this.state.userData.portfolios}
+                  newPortfolio={this.newPortfolio}
                   {...props}
                 />
               );

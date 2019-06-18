@@ -17,8 +17,10 @@ export default class MyPortfolioList extends Component {
       }
 
       handleSubmit = event => {
+        debugger
         event.preventDefault()
-        this.props.newPortfolio(this.props.user, this.state.risk_profile)
+        const num = parseInt(this.state.risk_profile)
+        this.props.newPortfolio(num)
       }
      
       render() {
