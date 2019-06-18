@@ -7,6 +7,7 @@ import MarketList from "../src/components/MarketList";
 import Market from "../src/components/Market";
 import Currency from "../src/components/Currency";
 import MyPortfolioList from "../src/components/MyPortfolioList";
+import UserProfile from "../src/components/UserProfile";
 import { Route, Switch } from "react-router-dom";
 
 export default class App extends React.Component {
@@ -157,6 +158,16 @@ export default class App extends React.Component {
             component={props => {
               return (
                 <MyPortfolioList portfolios={this.state.userData.portfolios} />
+              );
+            }}
+          />
+
+          <Route
+            exact
+            path={`/my-profile`}
+            component={props => {
+              return (
+                <UserProfile user={this.state.userData} />
               );
             }}
           />
