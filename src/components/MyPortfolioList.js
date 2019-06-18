@@ -18,14 +18,15 @@ export default class MyPortfolioList extends Component {
 
       handleSubmit = event => {
         event.preventDefault()
-        this.props.newPortfolio(this.props.user, this.state.risk_profile)
+        const num = parseInt(this.state.risk_profile)
+        this.props.newPortfolio(num)
       }
      
       render() {
         return (
          <div>
             <p>Click on each portfolio for more information</p>
-            {this.props.portfolios.map(portfolio => <PortfolioCard portfolio={portfolio}/>) }
+            {this.props.portfolios.map((portfolio, index) => <PortfolioCard key={index} portfolio={portfolio}/>) }
 
             <p>To add a new portfolio, enter the risk factor your portfolio will have below (0-10)</p>
             <form onSubmit={event => this.handleSubmit(event)}>

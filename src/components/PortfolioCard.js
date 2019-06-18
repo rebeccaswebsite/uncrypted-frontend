@@ -17,7 +17,8 @@ export default class PortfolioCard extends Component {
     render() {
         return (
             <div>
-                 <ul>
+            <p>Portfolio with risk profile {this.props.portfolio.risk_profile}</p>
+                 {/* <ul>
                     <li onClick={this.handleClick}>Your {this.props.portfolio.currencies[0].ticker} to {this.props.portfolio.currencies[0].target} portfolio</li>
                     {this.state.selectedPortfolio
                     ? <div>
@@ -37,7 +38,7 @@ export default class PortfolioCard extends Component {
                         )}
                     </div>
                     : null}
-                </ul>
+                </ul> */}
             </div>
         )
     }
