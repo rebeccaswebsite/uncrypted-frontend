@@ -9,6 +9,7 @@ import Currency from "../src/components/Currency";
 import MyPortfolioList from "../src/components/MyPortfolioList";
 import { Route, Switch, withRouter } from "react-router-dom";
 import LoginForm from "./pages/Login";
+import { validate } from "./services/api";
 
 class App extends React.Component {
   constructor(props) {
@@ -41,6 +42,16 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    if (localStorage.token) {
+      validate().then(resp => {
+        if (resp.error) {
+          alert(resp.error);
+        } else {
+          this.login(resp.id, resp.username);
+        }
+      });
+    }
+
     this.getCurrencies();
     setInterval(() => this.getCurrencies(), 10000);
     this.getMarkets();
@@ -49,7 +60,7 @@ class App extends React.Component {
 
   login = (userId, userName) => {
     this.setState({ loggedInUser: { id: userId, name: userName } });
-    this.getUserData(userId);
+    this.getUserData(userId).then();
     this.props.history.push("/dashboard");
     localStorage.setItem("token", userId);
   };
@@ -64,7 +75,7 @@ class App extends React.Component {
         profile_picture: ""
       }
     });
-    localStorage.setItem("token", "");
+    localStorage.removeItem("token");
   };
 
   getUserData = id => {

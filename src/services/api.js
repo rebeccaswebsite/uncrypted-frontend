@@ -13,4 +13,10 @@ export const login = (loginEmail, loginPassword) => {
   return fetch(loginURL, options).then(resp => resp.json());
 };
 
-export default { login };
+export const validate = () => {
+  return fetch("http://localhost:3000/validate", {
+    headers: { Authorisation: localStorage.token }
+  }).then(resp => resp.json());
+};
+
+export default { login, validate };
