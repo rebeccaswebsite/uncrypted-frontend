@@ -107,19 +107,23 @@ class App extends React.Component {
       .then(data => this.setState({ portfolios: data }));
   };
 
-  newPortfolio = (risk_profile) => {
+  newPortfolio = num => {
     const data = {
       user_id: this.state.loggedInUser.id,
-      risk_profile: risk_profile
+      risk_profile: num
     }
     return fetch('http://localhost:3000/portfolios/', {
       method: 'POST',
-      body: data
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
     })
     .then(response =>
-      response.json().then(json => {
-        return json;
-      }))
+      response.json())
+      .then(data => {
+        console.log(data);
+      })
   }
 
   changeSelectedMarket = market => {
