@@ -9,14 +9,12 @@ import Currency from "../src/components/Currency";
 import MyPortfolioList from "../src/components/MyPortfolioList";
 import { Route, Switch, withRouter } from "react-router-dom";
 import LoginForm from "./pages/Login";
-import { validate } from "./services/api";
-
+import { validate, getData } from "./services/api";
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      loggedInUser: { id: "", name: "" },
       userData: {
         email: "",
         name: "",
@@ -36,8 +34,7 @@ class App extends React.Component {
         volume: "",
         change: "",
         currency_markets: []
-      },
-      portfolios: []
+      }
     };
   }
 
@@ -58,11 +55,12 @@ class App extends React.Component {
     // this.getPortfolios();
   }
 
-  login = (userId, userName) => {
-    this.setState({ loggedInUser: { id: userId, name: userName } });
-    this.getUserData(userId).then();
+  login = (token, userName) => {
+    getData().then(data => {
+      this.setState({ userData: data });
+    });
     this.props.history.push("/dashboard");
-    localStorage.setItem("token", userId);
+    localStorage.setItem("token", token);
   };
 
   logout = () => {
@@ -78,13 +76,12 @@ class App extends React.Component {
     localStorage.removeItem("token");
   };
 
-  getUserData = id => {
-    const userURL = `http://localhost:3000/users/${id}`;
-    return fetch(userURL)
-      .then(resp => resp.json())
-      .then(data => this.setState({ userData: data }))
-      .then(console.log);
-  };
+  // getUserData = id => {
+  //   const userURL = `http://localhost:3000/users/${id}`;
+  //   return fetch(userURL)
+  //     .then(resp => resp.json())
+  //     .then(data => this.setState({ userData: data }));
+  // };
 
   getCurrencies = () => {
     const currenciesURL = "http://localhost:3000/currencies";
@@ -124,16 +121,19 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Navbar
-          loggedInUser={this.state.loggedInUser.name}
-          logout={this.logout}
-        />
+        <Navbar userData={this.state.userData.name} logout={this.logout} />
         <Switch>
           <Route
             exact
             path="/"
             render={props => {
-              return <Dashboard portfolios={this.state.userData.portfolios} />;
+              return (
+                <Dashboard
+                  portfolios={this.state.userData.portfolios}
+                  userData={this.state.userData}
+                  {...props}
+                />
+              );
             }}
           />
           <Route
@@ -143,7 +143,7 @@ class App extends React.Component {
               return (
                 <Dashboard
                   portfolios={this.state.userData.portfolios}
-                  loggedInUser={this.state.loggedInUser}
+                  userData={this.state.userData}
                   {...props}
                 />
               );

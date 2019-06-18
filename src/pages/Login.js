@@ -16,7 +16,7 @@ class LoginForm extends React.PureComponent {
       if (data.error) {
         alert(data.error);
       } else {
-        this.props.login(data.id, data.username);
+        this.props.login(data.token, data.username);
       }
     });
   };

@@ -19,4 +19,10 @@ export const validate = () => {
   }).then(resp => resp.json());
 };
 
-export default { login, validate };
+export const getData = () => {
+  return fetch("http://localhost:3000/data", {
+    headers: { Authorisation: localStorage.token }
+  }).then(resp => resp.json());
+};
+
+export default { login, validate, getData };
