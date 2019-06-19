@@ -16,7 +16,9 @@ export const login = (loginEmail, loginPassword) => {
 export const validate = () => {
   return fetch("http://localhost:3000/validate", {
     headers: { Authorisation: localStorage.token }
-  }).then(resp => resp.json());
+  }).then(resp => {
+    resp.json();
+  });
 };
 
 export const getData = () => {

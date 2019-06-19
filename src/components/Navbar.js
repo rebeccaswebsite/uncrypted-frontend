@@ -6,9 +6,9 @@ export default function Navbar(props) {
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand" href="#">
-          {props.userData === ""
+          {!localStorage.token
             ? `Uncrypted`
-            : `Uncrypted - ${props.userData}`}
+            : `Uncrypted - ${props.userData.name}`}
         </a>
         <button
           className="navbar-toggler"

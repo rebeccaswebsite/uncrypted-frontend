@@ -50,9 +50,8 @@ class App extends React.Component {
     }
 
     this.getCurrencies();
-    setInterval(() => this.getCurrencies(), 10000);
+    // setInterval(() => this.getCurrencies(), 10000);
     this.getMarkets();
-    // this.getPortfolios();
   }
 
   login = (token, userName) => {
@@ -134,9 +133,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Navbar userData={this.state.userData.name} logout={this.logout} />
+        <Navbar userData={this.state.userData} logout={this.logout} />
         <Switch>
-          <Route
+          {/* <Route
             exact
             path="/"
             render={props => {
@@ -148,8 +147,8 @@ class App extends React.Component {
                 />
               );
             }}
-          />
-          <Route
+          /> */}
+          {/* <Route
             exact
             path="/dashboard"
             render={props => {
@@ -161,8 +160,8 @@ class App extends React.Component {
                 />
               );
             }}
-          />
-          <Route
+          /> */}
+          {/* <Route
             exact
             path="/currencies"
             render={props => {
@@ -174,8 +173,8 @@ class App extends React.Component {
                 />
               );
             }}
-          />
-          <Route
+          /> */}
+          {/* <Route
             exact
             path="/markets"
             render={props => {
@@ -225,7 +224,7 @@ class App extends React.Component {
                 />
               );
             }}
-          />
+          /> */}
           <Route
             exact
             path={`/login`}
