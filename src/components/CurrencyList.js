@@ -4,8 +4,8 @@ import CurrencyCard from "./CurrencyCard";
 export default class CurrencyList extends Component {
   render() {
     return (
-      <div class="container">
-        <div class="row">
+      <div className="container">
+        <div className="row">
           {this.props.currencies.map((currency, index) => (
             <CurrencyCard
               key={index}

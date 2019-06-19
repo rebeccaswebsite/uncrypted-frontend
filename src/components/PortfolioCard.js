@@ -18,17 +18,17 @@ export default class PortfolioCard extends Component {
   render() {
     return (
       <div>
-        <div class="col-sm">
-          <div class="card" style={{ width: 18 + "em" }}>
-            <div class="card-body">
-              <h5 class="card-title">
+        <div className="col-sm">
+          <div className="card" style={{ width: 18 + "em" }}>
+            <div className="card-body">
+              <h5 className="card-title">
                 <Link className="nav-link" to={`/currencies/`}>
                   <h3>Currency: {this.props.portfolio.currency}</h3>
                 </Link>
               </h5>
-              <p class="card-text">
+              <div className="card-text">
                 <p>Quantity: {this.props.portfolio.quantity}</p>
-              </p>
+              </div>
             </div>
           </div>
         </div>

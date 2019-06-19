@@ -17,6 +17,7 @@ export default function Currency(props) {
       </h4>
       {props.selectedCurrency.currency_markets.map(currency_market => (
         <CurrencyMarket
+          addOrUpdatePortfolio={props.addOrUpdatePortfolio}
           selectedCurrency={props.selectedCurrency}
           currency_market={currency_market}
         />

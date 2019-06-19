@@ -101,6 +101,48 @@ class App extends React.Component {
       .then(data => this.setState({ markets: data }));
   };
 
+  addToPortfolios = portfolio => {
+    const { userData } = this.state;
+    this.setState({
+      userData: {
+        ...userData,
+        portfolios: [...userData.portfolios, portfolio]
+      }
+    });
+    // this.setState({userData: })
+    console.log("calling the function addToPortfolios", portfolio);
+  };
+
+  updatePortfolio = portfolio => {
+    const { userData } = this.state;
+
+    const portfolios = userData.portfolios.map(existingPortfolio =>
+      existingPortfolio.id === portfolio.id ? portfolio : existingPortfolio
+    );
+
+    this.setState({ userData: { ...userData, portfolios } });
+  };
+
+  portfolioIsAlreadyInPortfolios = portfolio =>
+    this.state.userData.portfolios.some(
+      existingPortfolio => existingPortfolio.id === portfolio.id
+    );
+
+  addOrUpdatePortfolio = portfolio => {
+    console.log(portfolio);
+    const {
+      portfolioIsAlreadyInPortfolios,
+      updatePortfolio,
+      addToPortfolios
+    } = this;
+
+    if (portfolioIsAlreadyInPortfolios(portfolio)) {
+      updatePortfolio(portfolio);
+    } else {
+      addToPortfolios(portfolio);
+    }
+  };
+
   newPortfolio = num => {
     const data = {
       user_id: this.state.loggedInUser.id,
@@ -211,6 +253,7 @@ class App extends React.Component {
               return (
                 <Currency
                   selectedCurrency={this.state.selectedCurrency}
+                  addOrUpdatePortfolio={this.addOrUpdatePortfolio}
                   {...props}
                 />
               );
