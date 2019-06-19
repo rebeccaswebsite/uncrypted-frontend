@@ -30,13 +30,13 @@ const addCurrencyToPortfolio = (currency, buyingPrice, addToPortfolio) => {
 export default function CurrencyMarket(props) {
   const classes = useStyles();
   return (
-    <div class="col-sm">
-      <div class="card" style={{ width: 18 + "em" }}>
-        <div class="card-body">
-          <h5 class="card-title">
+    <div className="col-md-4">
+      <div className="card" style={{ width: 18 + "em" }}>
+        <div className="card-body">
+          <h5 className="card-title">
             <h3>Market: {props.currency_market.market.name}</h3>
           </h5>
-          <div class="card-text">
+          <div className="card-text">
             <p>Price: {props.currency_market.price}</p>
             <p>Volume: {props.currency_market.volume}</p>
             <Button

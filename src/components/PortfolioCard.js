@@ -18,7 +18,7 @@ export default class PortfolioCard extends Component {
   render() {
     return (
       <div>
-        <div className="col-sm">
+        <div className="col-md-4">
           <div className="card" style={{ width: 18 + "em" }}>
             <div className="card-body">
               <h5 className="card-title">

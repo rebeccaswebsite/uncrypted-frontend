@@ -34,7 +34,8 @@ class App extends React.Component {
         volume: "",
         change: "",
         currency_markets: []
-      }
+      },
+      trace1: { mode: "lines+markers", name: "US Dollar", y: [] }
     };
   }
 
@@ -55,7 +56,7 @@ class App extends React.Component {
     }
 
     this.getCurrencies();
-    // setInterval(() => this.getCurrencies(), 10000);
+    setInterval(() => this.getCurrencies(), 30000);
     this.getMarkets();
   }
 
@@ -87,11 +88,29 @@ class App extends React.Component {
   //     .then(data => this.setState({ userData: data }));
   // };
 
+  setTracesForChart = data => {
+    if (this.state.selectedCurrency.price !== "") {
+      const currency = data.find(
+        currency => currency.ticker === this.state.selectedCurrency.ticker
+      );
+      this.setState({
+        trace1: {
+          ...this.state.trace1,
+          y: [...this.state.trace1.y, parseFloat(currency.price)]
+        }
+      });
+      console.log(this.state.trace1.y);
+    }
+  };
+
   getCurrencies = () => {
     const currenciesURL = "http://localhost:3000/currencies";
     return fetch(currenciesURL)
       .then(resp => resp.json())
-      .then(data => this.setState({ currencies: data }));
+      .then(data => {
+        this.setState({ currencies: data });
+        this.setTracesForChart(data);
+      });
   };
 
   getMarkets = () => {
@@ -171,6 +190,12 @@ class App extends React.Component {
   };
 
   changeSelectedCurrency = currency => {
+    this.setState({
+      trace1: {
+        ...this.state.trace1,
+        y: []
+      }
+    });
     const currencyURL = `http://localhost:3000/currencies/${currency.id}`;
     return fetch(currencyURL)
       .then(resp => resp.json())
@@ -182,7 +207,7 @@ class App extends React.Component {
       <div>
         <Navbar userData={this.state.userData} logout={this.logout} />
         <Switch>
-          {/* <Route
+          <Route
             exact
             path="/"
             render={props => {
@@ -194,20 +219,21 @@ class App extends React.Component {
                 />
               );
             }}
-          /> */}
-          {/* <Route
+          />
+          <Route
             exact
             path="/dashboard"
             render={props => {
               return (
                 <Dashboard
-                  portfolios={this.state.userData.portfolios}
+                  portfolios={this.state.userData.portfolios.slice(0, 3)}
                   userData={this.state.userData}
+                  currencies={this.state.currencies}
                   {...props}
                 />
               );
             }}
-          /> */}
+          />
           <Route
             exact
             path="/currencies"
@@ -252,6 +278,7 @@ class App extends React.Component {
             render={props => {
               return (
                 <Currency
+                  traceForChart={this.state.trace1}
                   selectedCurrency={this.state.selectedCurrency}
                   addOrUpdatePortfolio={this.addOrUpdatePortfolio}
                   {...props}

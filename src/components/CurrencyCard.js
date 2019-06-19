@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function CurrencyCard(props) {
   return (
-    <div className="col-sm">
+    <div className="col-md-4">
       <div
         className="card"
         style={{ width: 18 + "em" }}
