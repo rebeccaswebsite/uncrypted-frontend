@@ -2,6 +2,15 @@ import React, { Component } from "react";
 import CurrencyCard from "./CurrencyCard";
 
 export default class CurrencyList extends Component {
+  componentDidMount() {
+    if (
+      !localStorage.getItem("token") ||
+      localStorage.getItem("token") === "undefined"
+    ) {
+      this.props.history.push("/login");
+    }
+  }
+
   render() {
     return (
       <div className="py-5">

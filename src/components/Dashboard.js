@@ -5,11 +5,14 @@ import MyPortfolioList from "./MyPortfolioList";
 import CurrencyList from "./CurrencyList";
 
 export default class Dashboard extends Component {
-  // componentDidMount() {
-  //   if (this.props.userData) {
-  //     this.props.history.push("/login");
-  //   }
-  // }
+  componentDidMount() {
+    if (
+      !localStorage.getItem("token") ||
+      localStorage.getItem("token") === "undefined"
+    ) {
+      this.props.history.push("/login");
+    }
+  }
 
   render() {
     return (
@@ -19,8 +22,11 @@ export default class Dashboard extends Component {
           <br />
           <h2>My Top Portfolios</h2>
           <MyPortfolioList portfolios={this.props.portfolios} />
-          <h2>Live Cryptocurrency Values</h2>
-          <CurrencyList currencies={this.props.currencies} />
+          <h2>Live Cryptocurrency Prices</h2>
+          <CurrencyList
+            changeSelectedCurrency={this.props.changeSelectedCurrency}
+            currencies={this.props.currencies}
+          />
         </div>
       </div>
     );

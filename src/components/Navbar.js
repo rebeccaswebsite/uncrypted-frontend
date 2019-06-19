@@ -47,7 +47,7 @@ export default function Navbar(props) {
                 My Profile
               </Link>
             </li> */}
-            {props.loggedInUser === "" ? (
+            {!localStorage.getItem("token") ? (
               <li className="nav-item">
                 <Link className="nav-link" to="/login">
                   Login

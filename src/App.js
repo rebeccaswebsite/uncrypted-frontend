@@ -35,7 +35,8 @@ class App extends React.Component {
         change: "",
         currency_markets: []
       },
-      trace1: { mode: "lines+markers", name: "US Dollar", y: [] }
+      trace1: { mode: "lines+markers", name: "US Dollar", y: [] },
+      userWallet: 0
     };
   }
 
@@ -63,9 +64,10 @@ class App extends React.Component {
   login = (token, userName) => {
     localStorage.setItem("token", token);
     getData().then(data => {
-      this.setState({ userData: data }, () =>
-        this.props.history.push("/dashboard")
-      );
+      this.setState({ userData: data }, () => {
+        this.calculateWallet();
+        this.props.history.push("/dashboard");
+      });
     });
   };
 
@@ -79,6 +81,28 @@ class App extends React.Component {
       }
     });
     localStorage.removeItem("token");
+  };
+
+  calculateWallet = () => {
+    const portfolios = this.state.userData.portfolios;
+    console.log("The wallet is being calculated.");
+
+    const currenciesInPortfolios = portfolios.map(portfolio =>
+      this.state.currencies.filter(
+        currency => portfolio.currency === currency.ticker
+      )
+    );
+    const values = currenciesInPortfolios.map((currency, i) => {
+      return parseFloat(currency[0].price) * portfolios[i].quantity;
+    });
+
+    const getSum = (total, num) => {
+      return total + Math.round(num);
+    };
+
+    const walletValue = values.reduce(getSum, 0);
+
+    this.setState({ userWallet: walletValue });
   };
 
   // getUserData = id => {
@@ -110,6 +134,7 @@ class App extends React.Component {
       .then(data => {
         this.setState({ currencies: data });
         this.setTracesForChart(data);
+        this.calculateWallet();
       });
   };
 
@@ -160,6 +185,8 @@ class App extends React.Component {
     } else {
       addToPortfolios(portfolio);
     }
+
+    this.calculateWallet();
   };
 
   newPortfolio = num => {
@@ -205,7 +232,16 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Navbar userData={this.state.userData} logout={this.logout} />
+        <Navbar userData={this.state.userData} logout={this.logout} /> <br />
+        {localStorage.getItem("token") &&
+        localStorage.getItem("token") !== "undefined" ? (
+          <div>
+            <h6>Amount on wallet:</h6> ${this.state.userWallet}{" "}
+            <h6>Currencies on wallet:</h6>
+            {this.state.currencies.map(currency => `${currency.ticker} `)}
+          </div>
+        ) : null}
+        <br />
         <Switch>
           <Route
             exact
@@ -229,6 +265,7 @@ class App extends React.Component {
                   portfolios={this.state.userData.portfolios.slice(0, 3)}
                   userData={this.state.userData}
                   currencies={this.state.currencies}
+                  changeSelectedCurrency={this.changeSelectedCurrency}
                   {...props}
                 />
               );
@@ -281,6 +318,7 @@ class App extends React.Component {
                   traceForChart={this.state.trace1}
                   selectedCurrency={this.state.selectedCurrency}
                   addOrUpdatePortfolio={this.addOrUpdatePortfolio}
+                  changeSelectedCurrency={this.changeSelectedCurrency}
                   {...props}
                 />
               );
