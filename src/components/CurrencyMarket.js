@@ -11,8 +11,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const addCurrencyToPortfolio = currency => {
-  console.log(`I would like to buy ${currency}`);
+const addCurrencyToPortfolio = (currency, buyingPrice) => {
+  const url = "http://localhost:3000/currency_portfolios";
+  const options = {
+    method: "POST",
+    headers: {
+      Authorisation: localStorage.token,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ currency: currency, buyingPrice: buyingPrice })
+  };
+
+  return fetch(url, options).then(resp => resp.json());
 };
 
 export default function CurrencyMarket(props) {
@@ -29,7 +39,10 @@ export default function CurrencyMarket(props) {
             <p>Volume: {props.currency_market.volume}</p>
             <Button
               onClick={() =>
-                addCurrencyToPortfolio(props.selectedCurrency.ticker)
+                addCurrencyToPortfolio(
+                  props.selectedCurrency,
+                  props.currency_market.price
+                )
               }
               variant="contained"
               className={classes.button}>
