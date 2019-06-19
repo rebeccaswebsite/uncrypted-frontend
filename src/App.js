@@ -166,7 +166,7 @@ class App extends React.Component {
               );
             }}
           /> */}
-          {/* <Route
+          <Route
             exact
             path="/currencies"
             render={props => {
@@ -174,12 +174,13 @@ class App extends React.Component {
                 <CurrencyList
                   currencies={this.state.currencies}
                   changeSelectedCurrency={this.changeSelectedCurrency}
+                  selectedCurrency={this.state.selectedCurrency}
                   {...props}
                 />
               );
             }}
-          /> */}
-          {/* <Route
+          />
+          <Route
             exact
             path="/markets"
             render={props => {
@@ -203,7 +204,6 @@ class App extends React.Component {
               );
             }}
           />
-
           <Route
             exact
             path={`/currencies/${this.state.selectedCurrency.id}`}
@@ -216,7 +216,6 @@ class App extends React.Component {
               );
             }}
           />
-
           <Route
             exact
             path={`/my-portfolios`}
@@ -229,7 +228,8 @@ class App extends React.Component {
                 />
               );
             }}
-          /> */}
+          />{" "}
+          */}
           <Route
             exact
             path={`/login`}
