@@ -39,14 +39,19 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    if (localStorage.token) {
-      validate().then(resp => {
-        if (resp.error) {
-          alert(resp.error);
-        } else {
-          this.login(resp.id, resp.username);
-        }
-      });
+    if (
+      localStorage.getItem("token") &&
+      localStorage.getItem("token") !== "undefined"
+    ) {
+      validate()
+        .then(resp => {
+          this.login(resp.token, resp.username);
+        })
+        .catch(err => {
+          alert(err);
+        });
+    } else {
+      this.props.history.push("/login");
     }
 
     this.getCurrencies();
@@ -55,15 +60,15 @@ class App extends React.Component {
   }
 
   login = (token, userName) => {
-    getData().then(data => {
-      this.setState({ userData: data });
-    });
-    this.props.history.push("/dashboard");
     localStorage.setItem("token", token);
+    getData().then(data => {
+      this.setState({ userData: data }, () =>
+        this.props.history.push("/dashboard")
+      );
+    });
   };
 
   logout = () => {
-    this.setState({ loggedInUser: { id: "", name: "" } });
     this.setState({
       userData: {
         email: "",

@@ -17,7 +17,7 @@ export const validate = () => {
   return fetch("http://localhost:3000/validate", {
     headers: { Authorisation: localStorage.token }
   }).then(resp => {
-    resp.json();
+    return resp.json();
   });
 };
 
