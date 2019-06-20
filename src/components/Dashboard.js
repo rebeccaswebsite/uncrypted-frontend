@@ -5,14 +5,14 @@ import MyPortfolioList from "./MyPortfolioList";
 import CurrencyList from "./CurrencyList";
 
 export default class Dashboard extends Component {
-  componentDidMount() {
-    if (
-      !localStorage.getItem("token") ||
-      localStorage.getItem("token") === "undefined"
-    ) {
-      this.props.history.push("/login");
-    }
-  }
+  // componentDidMount() {
+  //   if (
+  //     !localStorage.getItem("token") ||
+  //     localStorage.getItem("token") === "undefined"
+  //   ) {
+  //     this.props.history.push("/login");
+  //   }
+  // }
 
   render() {
     return (

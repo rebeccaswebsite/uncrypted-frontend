@@ -236,14 +236,18 @@ class App extends React.Component {
         {localStorage.getItem("token") &&
         localStorage.getItem("token") !== "undefined" ? (
           <div>
-            <h6>Amount on wallet:</h6> $
-            {this.state.userWallet
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
-            <h6>Currencies on wallet:</h6>
-            {this.state.userData.portfolios.map(
-              portfolio => `${portfolio.currency} `
-            )}
+            <h4>
+              Amount in wallet: $
+              {this.state.userWallet
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+            </h4>
+            <h4>
+              Currencies in wallet:
+              {this.state.userData.portfolios.map(
+                portfolio => ` ${portfolio.currency}`
+              )}
+            </h4>
           </div>
         ) : null}
         <br />
